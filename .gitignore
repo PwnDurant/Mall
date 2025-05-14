@@ -23,3 +23,5 @@ buildNumber.properties
 **/target/
 .idea
 **/.gitignore
+**/.bootstrap.yml
+**/.application.yml

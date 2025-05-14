@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: mall-gateway
+  profiles:
+    active: prod
+  cloud:
+    nacos:
+      config:
+        #        配置文件命名空间
+        namespace: b90a0d8e-4893-4bf4-ab25-df4e2924b0ec
+        file-extension: yaml
+        server-addr: 127.0.0.1:8849
+        group: prod
+        ext-config[0].data-id: other.yml
+        ext-config[0].group: dev
+        ext-config[0].refresh: true

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: mall-product
+  profiles:
+    active: prod
+  cloud:
+    nacos:
+      config:
+        #        配置文件命名空间
+        namespace: 0d594df5-e06f-4269-8a96-ed21a1132a46
+        file-extension: yaml
+        server-addr: 127.0.0.1:8849
+        group: prod
+        ext-config[0].data-id: datasource.yml
+        ext-config[0].group: dev
+        ext-config[0].refresh: true
+
+        ext-config[1].data-id: mybatis.yml
+        ext-config[1].group: dev
+        ext-config[1].refresh: true
+
+        ext-config[2].data-id: other.yml
+        ext-config[2].group: dev
+        ext-config[2].refresh: true
