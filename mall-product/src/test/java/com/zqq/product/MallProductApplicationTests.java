@@ -3,20 +3,20 @@ package com.zqq.product;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zqq.product.productDB.entity.BrandEntity;
 import com.zqq.product.productDB.service.BrandService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 @SpringBootTest
-class MallProductApplicationTests {
+public class MallProductApplicationTests {
 
 	@Autowired
 	private BrandService brandService;
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 
 		BrandEntity brandEntity = new BrandEntity();
 //		brandEntity.setDescript("cehsi");
@@ -28,10 +28,10 @@ class MallProductApplicationTests {
 //		brandEntity.setDescript("ceshi");
 //		brandService.updateById(brandEntity);
 
-		List<BrandEntity> brandId = brandService.list(new QueryWrapper<BrandEntity>().eq("brand_id", 18L));
-		brandId.forEach((item)->{
-			System.out.println(item);
-		});
+//		List<BrandEntity> brandId = brandService.list(new QueryWrapper<BrandEntity>().eq("brand_id", 18L));
+//		brandId.forEach((item)->{
+//			System.out.println(item);
+//		});
 
 
 

@@ -16,8 +16,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * 		2，配置Mybatis-Plus相关信息
  * 			1）使用 @MapperScan
  * 			2）告诉映射文件位置
+ * 	2，逻辑删除
+ * 	1）配置全局的逻辑删除规则
+ * 	2）配置逻辑删除组件
+ * 	3）加上逻辑删除注解
  */
-@MapperScan("com.zqq.product.productDB.dao")
 @SpringBootApplication
 @EnableDiscoveryClient
 public class MallProductApplication {
