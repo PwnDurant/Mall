@@ -1,6 +1,6 @@
-package com.zqq.product;
+package com.zqq.thirdpart;
 
-import com.zqq.product.productDB.service.BrandService;
+import com.aliyun.oss.OSSClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,24 +10,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-
-/**
- * 引入 oss 依赖
- * 配置 key，endpoint 相关信息
- * 使用 OSSClient 进行相关操作
- */
 @SpringBootTest
-@RunWith(SpringRunner.class)  //使用 Spring 的测试运行器来运行测试，并完成依赖注入
-public class MallProductApplicationTests {
+@RunWith(SpringRunner.class)
+public class ThirdPartApplicationTests {
 
-	@Autowired
-	private BrandService brandService;
+    @Autowired
+    OSSClient ossClient;
 
-//	@Autowired
-//	OSS ossClient;
-
-	@Test
-	public void contextLoads() throws FileNotFoundException {
+    @Test
+    public void contextLoads() throws FileNotFoundException {
 
 //		BrandEntity brandEntity = new BrandEntity();
 //		brandEntity.setDescript("cehsi");
@@ -44,15 +35,15 @@ public class MallProductApplicationTests {
 //			System.out.println(item);
 //		});
 
-//		FileInputStream fileInputStream = new FileInputStream("/Users/zhaoqianqian/Downloads/pic/智学OJ.png");
-//
-//		ossClient.putObject("l-oj-test","test.jpg",fileInputStream);
-//
-//		ossClient.shutdown();
-//
-//		System.out.println("上传成功");
+        FileInputStream fileInputStream = new FileInputStream("/Users/zhaoqianqian/Downloads/pic/智学OJ.png");
+
+        ossClient.putObject("l-oj-test","test.jpg",fileInputStream);
+
+        ossClient.shutdown();
+
+        System.out.println("上传成功");
 
 
-	}
+    }
 
 }

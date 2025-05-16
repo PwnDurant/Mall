@@ -21,6 +21,7 @@
         <module>renren-generator</module>
         <module>mall-common</module>
         <module>mall-gateway</module>
+        <module>third-part</module>
     </modules>
 
 </project>

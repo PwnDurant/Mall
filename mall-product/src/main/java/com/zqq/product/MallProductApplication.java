@@ -20,6 +20,20 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * 	1）配置全局的逻辑删除规则
  * 	2）配置逻辑删除组件
  * 	3）加上逻辑删除注解
+ *
+ * 	3，JSR303
+ * 	1),给Bean添加校验注解,并定义消息提示
+ * 	2),开启校验注解 @Valid 校验错误之后就会有默认响应
+ * 	3),可以紧跟一个BindingResult就可以获取到校验结果
+ *
+ * 	4,统一异常处理
+ * 	1）使用 @ControllerAdvice
+ *  2）分组校验,默认没有指定的分组校验的注解不生效（多场景的复杂校验)
+ *
+ *  5,自定义校验注解
+ *  1),编写一个自定义的校验注解
+ *  2),编写一个自定义的校验器
+ *  3),关联校验器和校验注解
  */
 @SpringBootApplication
 @EnableDiscoveryClient

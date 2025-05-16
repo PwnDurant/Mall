@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: mall-third
+  profiles:
+    active: prod
+  cloud:
+    nacos:
+      config:
+        #        配置文件命名空间
+        namespace: 3445314c-664d-4401-a081-4e7dbc24da69
+        file-extension: yaml
+        server-addr: 127.0.0.1:8849
+        group: prod
+
+        ext-config[0].data-id: oss.yml
+        ext-config[0].group: dev
+        ext-config[0].refresh: true
+
+        ext-config[1].data-id: other.yml
+        ext-config[1].group: dev
+        ext-config[1].refresh: true
