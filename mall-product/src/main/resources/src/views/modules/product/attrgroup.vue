@@ -9,7 +9,7 @@
         <el-button v-if="isAuth('product:attrgroup:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
         <el-button v-if="isAuth('product:attrgroup:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
-    </el-form>
+    </el-form> 
     <el-table
       :data="dataList"
       border
@@ -84,7 +84,7 @@
   </div>
 </template>
 
-<script>
+<script> 
   import AddOrUpdate from './attrgroup-add-or-update'
   export default {
     data () {

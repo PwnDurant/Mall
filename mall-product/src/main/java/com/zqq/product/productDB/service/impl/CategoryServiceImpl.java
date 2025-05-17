@@ -1,6 +1,5 @@
 package com.zqq.product.productDB.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,6 +14,7 @@ import com.zqq.common.utils.Query;
 import com.zqq.product.productDB.dao.CategoryDao;
 import com.zqq.product.productDB.entity.CategoryEntity;
 import com.zqq.product.productDB.service.CategoryService;
+import org.springframework.util.StringUtils;
 
 
 @Service("categoryService")
@@ -64,6 +64,36 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 //        使用逻辑删除
         baseMapper.deleteBatchIds(list);
 
+    }
+
+    /**
+     * 找到catelogId 完整路径
+     * @param catelogId
+     * @return 【2，25，225】
+     */
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+
+        List<Long> paths=new ArrayList<>();
+        List<Long> path = findParentPath(catelogId,paths);
+
+//        Collections.reverse(path); //这个是逆序链表的
+
+        return path.toArray(new Long[path.size()]);
+
+    }
+
+//    2,25,225
+    private List<Long> findParentPath(Long catelogId, List<Long> paths){
+//            先查出当前分类的信息
+        CategoryEntity byId = this.getById(catelogId);
+        if(byId.getParentCid()!=0){
+//            说明他有一个有效的父分类
+            findParentPath(byId.getParentCid(),paths);
+        }
+    //        收集当前节点Id (最外层节点Id)
+        paths.add(catelogId);
+        return paths;
     }
 
     /**

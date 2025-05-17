@@ -1,6 +1,7 @@
 package com.zqq.product;
 
 import com.zqq.product.productDB.service.BrandService;
+import com.zqq.product.productDB.service.impl.CategoryServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 
 
 /**
@@ -22,6 +24,8 @@ public class MallProductApplicationTests {
 
 	@Autowired
 	private BrandService brandService;
+    @Autowired
+    private CategoryServiceImpl categoryService;
 
 //	@Autowired
 //	OSS ossClient;
@@ -51,6 +55,8 @@ public class MallProductApplicationTests {
 //		ossClient.shutdown();
 //
 //		System.out.println("上传成功");
+
+		System.out.println(Arrays.toString(categoryService.findCatelogPath(225L)));
 
 
 	}
