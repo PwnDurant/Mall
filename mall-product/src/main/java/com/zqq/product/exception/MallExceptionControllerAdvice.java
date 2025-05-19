@@ -42,4 +42,9 @@ public class MallExceptionControllerAdvice {
         return R.error(BizCodeEnum.VALID_EXCEPTION);
     }
 
+    @ExceptionHandler(value = NullPointerException.class)
+    public R handleException(NullPointerException e){
+        return R.error(BizCodeEnum.NULL_EXCEPTION);
+    }
+
 }

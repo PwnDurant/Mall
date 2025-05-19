@@ -1,5 +1,7 @@
 package com.zqq.product.productDB.service.impl;
 
+import com.zqq.product.productDB.service.CategoryBrandRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,6 +16,7 @@ import com.zqq.common.utils.Query;
 import com.zqq.product.productDB.dao.CategoryDao;
 import com.zqq.product.productDB.entity.CategoryEntity;
 import com.zqq.product.productDB.service.CategoryService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 
@@ -22,6 +25,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
 //    @Autowired
 //    private CategoryDao categoryDao;
+
+    @Autowired
+    private CategoryBrandRelationService categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -83,7 +89,21 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     }
 
-//    2,25,225
+    /**
+     * 级联更新所有关联的数据
+     * @param category
+     */
+    @Transactional
+    @Override
+    public void updateCascade(CategoryEntity category) {
+
+        this.updateById(category);
+
+        categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
+
+    }
+
+    //    2,25,225
     private List<Long> findParentPath(Long catelogId, List<Long> paths){
 //            先查出当前分类的信息
         CategoryEntity byId = this.getById(catelogId);

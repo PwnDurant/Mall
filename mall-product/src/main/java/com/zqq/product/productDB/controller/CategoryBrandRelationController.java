@@ -1,14 +1,15 @@
 package com.zqq.product.productDB.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zqq.product.productDB.entity.BrandEntity;
+import com.zqq.product.vo.BrandVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.zqq.product.productDB.entity.CategoryBrandRelationEntity;
 import com.zqq.product.productDB.service.CategoryBrandRelationService;
@@ -31,6 +32,28 @@ public class CategoryBrandRelationController {
     private CategoryBrandRelationService categoryBrandRelationService;
 
     /**
+     * 查询当前分类下的所有的品牌
+     * 1,Controller 只来处理请求，接收和校验数据
+     * 2,Service 来接收Controller的数据进行业务处理
+     * 3,Controller 接收Service的数据封装成页面指定的VO
+     * @return
+     */
+    @GetMapping("/brands/list")
+    public R relationBrandsList(@RequestParam(value = "catId",required = true) Long catId){
+
+        List<BrandEntity> vos=categoryBrandRelationService.getBrandsByCatId(catId);
+
+        List<BrandVO> brandVOList = vos.stream().map(item -> {
+            BrandVO brandVO = new BrandVO();
+            brandVO.setBrandName(item.getName());
+            brandVO.setBrandId(item.getBrandId());
+            return brandVO;
+        }).collect(Collectors.toList());
+
+        return R.ok().put("data",brandVOList);
+    }
+
+    /**
      * 列表
      */
     @RequestMapping("/list")
@@ -38,6 +61,15 @@ public class CategoryBrandRelationController {
         PageUtils page = categoryBrandRelationService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 获取当前品牌关联的所有分类接口
+     */
+    @GetMapping("/catelog/list")
+    public R catalogList(@RequestParam("brandId") Long brandId){
+        List<CategoryBrandRelationEntity> data=categoryBrandRelationService.list(new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+        return R.ok().put("data", data);
     }
 
 
@@ -56,7 +88,9 @@ public class CategoryBrandRelationController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
-		categoryBrandRelationService.save(categoryBrandRelation);
+
+
+		categoryBrandRelationService.saveDetail(categoryBrandRelation);
 
         return R.ok();
     }
