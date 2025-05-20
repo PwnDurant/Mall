@@ -1,8 +1,11 @@
 package com.zqq.product.productDB.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.zqq.product.productDB.entity.ProductAttrValueEntity;
+import com.zqq.product.productDB.service.ProductAttrValueService;
 import com.zqq.product.vo.AttrRespVO;
 import com.zqq.product.vo.AttrVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +30,17 @@ import com.zqq.common.utils.R;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
 
-
+    /**
+     * 查出商品的规格属性
+     */
+    @GetMapping("/base/listforspu/{spuId}")
+    public R baseAttrListForSpu(@PathVariable("spuId") Long spuId){
+        List<ProductAttrValueEntity> entities=productAttrValueService.baseAttrListForSpu(spuId);
+        return R.ok().put("data",entities);
+    }
 
     @GetMapping("/{attrType}/list/{catelogId}")
     public R baseAttrList(@RequestParam Map<String, Object> params,@PathVariable("catelogId") Long catelogId,@PathVariable("attrType") String attrType){
@@ -73,6 +85,17 @@ public class AttrController {
     public R update(@RequestBody AttrVO attr){
 		attrService.updateAttr(attr);
 
+        return R.ok();
+    }
+
+    /**
+     * 更新
+     */
+    @PostMapping("/update/{spuId}")
+    public R updateWithSpuId(@PathVariable("spuId") Long spuId,
+                             @RequestBody List<ProductAttrValueEntity> entities){
+//        attrService.updateAttr(attr);
+        productAttrValueService.updateSpuAttr(spuId,entities);
         return R.ok();
     }
 

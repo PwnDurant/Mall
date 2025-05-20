@@ -25,7 +25,7 @@ import com.zqq.common.utils.R;
  * @date 2025-05-14 10:37:50
  */
 @RestController
-@RequestMapping("wareDB/wareinfo")
+@RequestMapping("ware/wareinfo")
 public class WareInfoController {
     @Autowired
     private WareInfoService wareInfoService;

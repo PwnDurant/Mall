@@ -168,5 +168,37 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         this.baseMapper.insert(spuInfoEntity);
     }
 
+    @Override
+    public PageUtils queryPageByCondition(Map<String, Object> params) {
+
+        QueryWrapper<SpuInfoEntity> wrapper = new QueryWrapper<>();
+        String key=(String) params.get("key");
+        String status=(String) params.get("status");
+        String brandId=(String) params.get("brandId");
+        String catelogId=(String) params.get("catelogId");
+        if(!StringUtils.isEmpty(key)){
+            wrapper.and((w)->{
+                w.eq("id",key).or().like("spu_name",key);
+            });
+//            为了避免逻辑歧义，当多个条件想组合成一个逻辑的时候，由于 or 的优先级高 最好用 lambda 表达式的写法
+//            status = 1 AND (id = 1 or spu_name like xxx)
+//            status = 1 AND id = 1 or spu_name like xxx
+        }
+        if(!StringUtils.isEmpty(status)){
+            wrapper.eq("publish_status",status);
+        }
+        if(!StringUtils.isEmpty(brandId)&&!"0".equalsIgnoreCase(brandId)){
+            wrapper.eq("brand_id",brandId);
+        }
+        if(!StringUtils.isEmpty(catelogId)&&!"0".equalsIgnoreCase(catelogId)){
+            wrapper.eq("catalogId",catelogId);
+        }
+        IPage<SpuInfoEntity> page = this.page(
+                new Query<SpuInfoEntity>().getPage(params),
+                wrapper
+        );
+        return new PageUtils(page);
+    }
+
 
 }

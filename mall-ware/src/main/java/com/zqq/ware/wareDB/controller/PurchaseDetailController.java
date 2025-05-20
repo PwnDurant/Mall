@@ -25,7 +25,7 @@ import com.zqq.common.utils.R;
  * @date 2025-05-14 10:37:51
  */
 @RestController
-@RequestMapping("wareDB/purchasedetail")
+@RequestMapping("ware/purchasedetail")
 public class PurchaseDetailController {
     @Autowired
     private PurchaseDetailService purchaseDetailService;
