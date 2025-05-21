@@ -9,6 +9,8 @@
 package com.zqq.common.utils;
 
 import com.zqq.common.exception.BizCodeEnum;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -19,12 +21,19 @@ import java.util.Map;
  *
  * @author Mark sunlightcs@gmail.com
  */
+@Getter
+@Setter
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
 	public R() {
 		put("code", 0);
 		put("msg", "success");
+	}
+
+	public R setData(Object data){
+		put("data",data);
+		return this;
 	}
 	
 	public static R error() {

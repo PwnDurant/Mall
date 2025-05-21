@@ -3,6 +3,7 @@ package com.zqq.coupon.couponDB.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import com.zqq.common.utils.R;
  */
 @RestController
 @RequestMapping("coupon/spubounds")
+@Slf4j
 public class SpuBoundsController {
     @Autowired
     private SpuBoundsService spuBoundsService;
@@ -51,8 +53,8 @@ public class SpuBoundsController {
      * 保存
      */
     @PostMapping("/save") public R save(@RequestBody SpuBoundsEntity spuBounds){
+        log.warn("开始保存 spuBounds 信息");
 		spuBoundsService.save(spuBounds);
-
         return R.ok();
     }
 

@@ -1,14 +1,12 @@
 package com.zqq.ware.wareDB.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.zqq.ware.vo.SkuHasStockVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.zqq.ware.wareDB.entity.WareSkuEntity;
 import com.zqq.ware.wareDB.service.WareSkuService;
@@ -29,6 +27,17 @@ import com.zqq.common.utils.R;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    /**
+     * 查询 SKU 是否有库存
+     */
+    @PostMapping("/hasStock")
+    public R getSkusHasStock(@RequestBody List<Long> skuIds){
+//        sku_is,stock
+        List<SkuHasStockVO> vos=wareSkuService.getSkusHasStock(skuIds);
+
+        return R.ok().setData(vos);
+    }
 
     /**
      * 列表
