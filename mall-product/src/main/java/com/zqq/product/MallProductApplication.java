@@ -35,6 +35,15 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *  1),编写一个自定义的校验注解
  *  2),编写一个自定义的校验器
  *  3),关联校验器和校验注解
+ *
+ *  页面开发：
+ *  1）引入模版引擎 thymeleaf-starter
+ *  2）按照要求静态资源都放在 static 文件夹下就可以直接按照路径访问
+ *  3）页面放在 templates 下也可以直接访问
+ *  4）SpringBoot 访问项目的时候默认会找 index
+ *  5）不重启服务器实时更新:
+ *  	1)引入 dev-tools
+ *  	2)修改完页面 controller shift f9 重新自动编译页面，如果是代码配置还是推荐重启
  */
 @EnableFeignClients(basePackages = "com.zqq.product.feign")
 @SpringBootApplication

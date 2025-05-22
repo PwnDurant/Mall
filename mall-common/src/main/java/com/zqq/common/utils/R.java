@@ -8,6 +8,8 @@
 
 package com.zqq.common.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.zqq.common.exception.BizCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +36,14 @@ public class R extends HashMap<String, Object> {
 	public R setData(Object data){
 		put("data",data);
 		return this;
+	}
+
+	//利用fastJson进行逆转
+	public <T> T getData(TypeReference<T> typeReference){
+		Object data = get("data");  //默认转换为是map类型
+		String jsonString = JSON.toJSONString(data); //需要转为map在转为json再逆转
+		T t = JSON.parseObject(jsonString, typeReference);
+		return t;
 	}
 	
 	public static R error() {

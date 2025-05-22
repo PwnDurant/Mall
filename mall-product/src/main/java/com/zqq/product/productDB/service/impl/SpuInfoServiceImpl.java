@@ -1,5 +1,6 @@
 package com.zqq.product.productDB.service.impl;
 
+import com.alibaba.fastjson.TypeReference;
 import com.alibaba.nacos.client.utils.StringUtils;
 import com.zqq.common.constant.ProductConstant;
 import com.zqq.common.es.SkuEsModel;
@@ -253,8 +254,10 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 //            TODO 1,发送远程调用，储存系统查询是否有库存
         Map<Long, Boolean> stockMap=null;
         try {
-            R skusHasStock = wareFeignService.getSkusHasStock(skuIds);
-            stockMap = skusHasStock.getData().stream().collect(Collectors.toMap(SkuHasStockVO::getSkuId, SkuHasStockVO::getHasStock));
+            R r = wareFeignService.getSkusHasStock(skuIds);
+            TypeReference<List<SkuHasStockVO>> typeReference = new TypeReference<List<SkuHasStockVO>>() {
+            };
+            stockMap = r.getData(typeReference).stream().collect(Collectors.toMap(SkuHasStockVO::getSkuId, SkuHasStockVO::getHasStock));
         }catch (Exception e){
             log.error("库存服务查询出现问题,原因:{}",e);
         }
