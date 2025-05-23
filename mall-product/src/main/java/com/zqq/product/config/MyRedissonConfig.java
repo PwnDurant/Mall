@@ -20,6 +20,8 @@ public class MyRedissonConfig {
 //        1，创建配置
         Config config = new Config();
         config.useSingleServer()
+                .setConnectionMinimumIdleSize(5)
+                .setConnectionPoolSize(10)
                 .setAddress("redis://123.56.253.179:6380");
 //        2，根据 config 创建出 RedissonClient 示例
         return Redisson.create(config);

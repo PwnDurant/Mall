@@ -3,13 +3,17 @@ spring:
     name: mall-elastic
   profiles:
     active: prod
+  thymeleaf:
+    cache: false
   cloud:
     nacos:
       config:
         #        配置文件命名空间
-        namespace: 0740479f-100a-4092-943e-00048d13e78c
+        namespace: 72fb9b23-2d9d-417b-8ce8-277f6eceedd8
         file-extension: yaml
         server-addr: 127.0.0.1:8849
         group: prod
 server:
   port: 12000
+
+
