@@ -13,5 +13,33 @@
         <result property="catelogId" column="catelog_id"/>
     </resultMap>
 
+<!--     resultType 返回集合里面的元素的类型，只要有嵌套属性就要封装自定义属性-->
+    <resultMap id="spuAttrGroup" type="com.zqq.product.vo.SpuItemAttrGroupVo">
+        <result property="groupName" column="attr_group_name"/>
+        <collection property="attrs" ofType="com.zqq.product.vo.Attr">
+            <result property="attrId" column="attr_id"/>
+            <result property="attrName" column="attr_name"/>
+            <result property="attrValue" column="attr_value"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="getAttrGroupWithAttrsBySpuId" resultMap="spuAttrGroup">
+        select
+            product.spu_id,
+            pag.attr_group_id,
+            pag.attr_group_name,
+            product.attr_id,
+            product.attr_name,
+            product.attr_value
+        from
+            pms_product_attr_value product
+                left join pms_attr_attrgroup_relation paar on product.attr_id = paar.attr_id
+                left join pms_attr_group pag on paar.attr_group_id = pag.attr_group_id
+        where
+            product.spu_id=#{spuId}
+        and pag.catelog_id=#{catalogId}
+    </select>
+
 
 </mapper>

@@ -23,6 +23,7 @@
         <module>mall-gateway</module>
         <module>third-part</module>
         <module>mall-elasticsearch</module>
+        <module>auth-server</module>
     </modules>
 
 </project>

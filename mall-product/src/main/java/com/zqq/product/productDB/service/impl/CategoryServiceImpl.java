@@ -278,7 +278,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     /**
      * 从数据库查询并封装整个分类数据
-     *
      * @return
      */
     public Map<String, List<Catelog2Vo>> getCatalogJsonFromDB() {

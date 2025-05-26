@@ -3,11 +3,12 @@ package com.zqq.product.productDB.service.impl;
 import com.zqq.product.productDB.entity.AttrEntity;
 import com.zqq.product.productDB.service.AttrService;
 import com.zqq.product.vo.AttrGroupWithAttrsVO;
+import com.zqq.product.vo.SpuItemAttrGroupVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -89,6 +90,14 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
             return withAttrsVO;
         }).collect(Collectors.toList());
         return collect;
+    }
+
+    @Override
+    public List<SpuItemAttrGroupVo> getAttrGroupWithAttrsBySpuId(Long spuId, Long catalogId) {
+//        查处当前 spu 对应的所有属性的分组信息以及当前分组下所有属性对应的值
+        AttrGroupDao baseMapper = this.getBaseMapper();
+        List<SpuItemAttrGroupVo> vos=baseMapper.getAttrGroupWithAttrsBySpuId(spuId,catalogId);
+        return vos;
     }
 
 }
