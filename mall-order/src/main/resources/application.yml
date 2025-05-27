@@ -10,6 +10,21 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8849
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /
+    publisher-confirms: true  # 开启发送端确认
+    publisher-returns: true  # 开启发送端消息抵达队列的确认
+    template:
+      mandatory: true  # 只要抵达队列，以异步发送优先回调我们这个 returnConfirm
+    listener:
+      simple:
+        acknowledge-mode: manual # 手动 ack 消息
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -19,3 +34,10 @@ mybatis-plus:
 
 server:
   port: 9000
+
+mall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10
+

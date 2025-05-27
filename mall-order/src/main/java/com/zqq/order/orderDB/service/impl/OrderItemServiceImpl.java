@@ -1,5 +1,6 @@
 package com.zqq.order.orderDB.service.impl;
 
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -25,5 +26,7 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemDao, OrderItemEnt
 
         return new PageUtils(page);
     }
+
+//    @RabbitHandler
 
 }

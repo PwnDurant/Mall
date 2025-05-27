@@ -29,6 +29,8 @@ spring:
   redis:
     host: 123.56.253.179
     port: 6380
+  session:
+    store-type: redis
 logging:
   level:
     com.zqq.product: error # 优化
@@ -38,3 +40,4 @@ mall:
     core-size: 20
     max-size: 200
     keep-alive-time: 10
+

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  * 1，整合MyBatis-Plus
@@ -46,6 +47,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *  	1)引入 dev-tools
  *  	2)修改完页面 controller shift f9 重新自动编译页面，如果是代码配置还是推荐重启
  */
+@EnableRedisHttpSession // 整合 redis 作为 Session 存储
 @EnableFeignClients(basePackages = "com.zqq.product.feign")
 @SpringBootApplication
 @EnableDiscoveryClient
