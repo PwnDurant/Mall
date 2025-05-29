@@ -24,6 +24,7 @@
         <module>third-part</module>
         <module>mall-elasticsearch</module>
         <module>auth-server</module>
+        <module>mall-seckill</module>
     </modules>
 
 </project>

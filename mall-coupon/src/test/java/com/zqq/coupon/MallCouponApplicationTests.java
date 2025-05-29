@@ -9,6 +9,9 @@ public class MallCouponApplicationTests {
 
     @Test
     public void contextLoads() {
+
+
+
     }
 
 }

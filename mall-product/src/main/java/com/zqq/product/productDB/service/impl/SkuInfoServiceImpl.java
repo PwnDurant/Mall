@@ -1,8 +1,12 @@
 package com.zqq.product.productDB.service.impl;
 
+import com.alibaba.fastjson.TypeReference;
+import com.zqq.common.utils.R;
+import com.zqq.product.feign.SeckillService;
 import com.zqq.product.productDB.entity.SkuImagesEntity;
 import com.zqq.product.productDB.entity.SpuInfoDescEntity;
 import com.zqq.product.productDB.service.*;
+import com.zqq.product.vo.SeckillSkuVo;
 import com.zqq.product.vo.SkuItemSaleAttrVo;
 import com.zqq.product.vo.SkuItemVo;
 import com.zqq.product.vo.SpuItemAttrGroupVo;
@@ -40,6 +44,8 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
     private SkuSaleAttrValueService skuSaleAttrValueService;
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
+    @Autowired
+    private SeckillService seckillService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -147,6 +153,15 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
             List<SkuImagesEntity> images = skuImagesService.getImagesBySkuId(skuId);
             skuItemVo.setImages(images);
         }, threadPoolExecutor);
+
+//        TODO 查询当前 sku 是否参与秒杀优惠 ,远程调用 秒杀服务的 controller
+        R seckillInfo = seckillService.getSkuSeckillInfo(skuId);
+//        TODO 封装数据
+        if(seckillInfo.getCode()==0){
+            SeckillSkuVo seckillInfoData = seckillInfo.getData(new TypeReference<SeckillSkuVo>() {
+            });
+            
+        }
 
 //        等待所有任务全部完成
         CompletableFuture.allOf(saleAttrFuture,descFuture,baseAttrFuture,imageFuture).get();

@@ -1,3 +1,11 @@
 #spring:
 #  application:
 #    name: mall-gateway
+
+spring:
+  cloud:
+    sentinel:
+      scg:
+        fallback:
+          content-type: application/json
+          response-status: 400

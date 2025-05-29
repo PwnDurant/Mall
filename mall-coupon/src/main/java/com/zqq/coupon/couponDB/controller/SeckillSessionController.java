@@ -1,20 +1,17 @@
 package com.zqq.coupon.couponDB.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.zqq.coupon.couponDB.entity.SeckillSessionEntity;
 import com.zqq.coupon.couponDB.service.SeckillSessionService;
 import com.zqq.common.utils.PageUtils;
 import com.zqq.common.utils.R;
-
+import org.w3c.dom.stylesheets.LinkStyle;
 
 
 /**
@@ -29,6 +26,13 @@ import com.zqq.common.utils.R;
 public class SeckillSessionController {
     @Autowired
     private SeckillSessionService seckillSessionService;
+
+
+    @GetMapping("/Lates3DaysSession")
+    public R getLates3DaysSession(){
+        List<SeckillSessionEntity> sessionEntities=seckillSessionService.getLates3DaysSession();
+        return R.ok().setData(sessionEntities);
+    }
 
     /**
      * 列表

@@ -16,6 +16,7 @@ public enum BizCodeEnum {
     UNKNOWN_EXCEPTION(10000,"系统未知异常"),
     NULL_EXCEPTION(10002,"空指针异常"),
     VALID_EXCEPTION(10001,"参数格式校验失败"),
+    TOO_MANY_REQUEST(10003,"发送请求过多"),
 
     PURCHASE_BIND(20000,"该采购单已经被领取,不能进行合并"),
     PRODUCT_UP_EXCEPTION(11000,"商品上架异常");
