@@ -10,7 +10,6 @@ public class SkuEsModel {
 
     private Long skuId;
 
-    private String test;
     private Long spuId;
 
     private String skuTitle;
